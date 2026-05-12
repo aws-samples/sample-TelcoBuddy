@@ -4,6 +4,9 @@ Telco Buddy is an AI-powered autonomous operations agent for 5G/4G core networks
 
 ## Architecture
 
+
+<img width="1214" height="795" alt="Screenshot 2026-05-12 at 1 42 38 PM" src="https://github.com/user-attachments/assets/7b8da9d5-38a2-466e-aaa3-2794afda7a33" />
+
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  Amazon EKS (5G core cluster)                               │
