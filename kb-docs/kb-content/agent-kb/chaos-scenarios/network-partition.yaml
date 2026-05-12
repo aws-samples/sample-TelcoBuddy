@@ -1,0 +1,16 @@
+name: Network Partition
+trigger: manual
+impact: high
+scenario:
+  - Apply NetworkPolicy to isolate NF
+  - Monitor inter-NF communication failures
+  - Check service mesh behavior
+expected_agent_action:
+  - Detect network connectivity issues
+  - Identify isolated pods
+  - Remove faulty NetworkPolicy
+  - Restore connectivity
+  - Verify traffic flow
+success_criteria:
+  - Network restored within 1 minute
+  - No data loss

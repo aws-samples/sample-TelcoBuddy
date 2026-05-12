@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "4"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"udr","aws.cdk.eks/prune-c868480772bc3d03bc7322e20dc4b4e28e01a2b5e2":"","component":"5g-core"},"name":"udr","namespace":"open5gs"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"udr"}},"template":{"metadata":{"labels":{"app":"udr","component":"5g-core"}},"spec":{"containers":[{"command":["/opt/open5gs/bin/open5gs-udrd"],"image":"123456789012.dkr.ecr.us-east-2.amazonaws.com/telco-buddy/open5gs:2.6.6","name":"udr","ports":[{"containerPort":7777}],"resources":{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"100m","memory":"128Mi"}}}]}}}}
+  creationTimestamp: "2026-03-20T16:43:36Z"
+  generation: 6
+  labels:
+    app: udr
+    aws.cdk.eks/prune-c868480772bc3d03bc7322e20dc4b4e28e01a2b5e2: ""
+    component: 5g-core
+  name: udr
+  namespace: open5gs
+  resourceVersion: "905073"
+  uid: e82aa4e4-7bc1-43dc-8d12-b5a1b8e3b71f
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: udr
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2026-03-21T00:04:53+05:30"
+      creationTimestamp: null
+      labels:
+        app: udr
+        component: 5g-core
+    spec:
+      containers:
+      - command:
+        - /opt/open5gs/bin/open5gs-udrd
+        image: 123456789012.dkr.ecr.us-east-2.amazonaws.com/telco-buddy/open5gs:2.6.6
+        imagePullPolicy: IfNotPresent
+        name: udr
+        ports:
+        - containerPort: 7777
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2026-03-20T18:28:50Z"
+    lastUpdateTime: "2026-03-20T18:34:55Z"
+    message: ReplicaSet "udr-7459d648b9" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2026-03-24T16:52:52Z"
+    lastUpdateTime: "2026-03-24T16:52:52Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 6
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

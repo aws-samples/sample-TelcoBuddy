@@ -1,0 +1,16 @@
+name: NRF Service Crash
+trigger: manual
+impact: critical
+scenario:
+  - Kill NRF pod
+  - Monitor dependent NF failures (AMF, SMF)
+  - Check service discovery impact
+expected_agent_action:
+  - Detect NRF pod termination
+  - Identify cascading failures
+  - Trigger pod restart
+  - Wait for NRF readiness
+  - Verify dependent NF recovery
+success_criteria:
+  - NRF restarts within 30 seconds
+  - Dependent NFs recover within 2 minutes

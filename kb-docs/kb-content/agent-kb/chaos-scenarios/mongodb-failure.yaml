@@ -1,0 +1,16 @@
+name: MongoDB Database Failure
+trigger: manual
+impact: critical
+scenario:
+  - Delete MongoDB pod
+  - Monitor NF authentication failures
+  - Check data persistence
+expected_agent_action:
+  - Detect MongoDB unavailability
+  - Verify StatefulSet recreation
+  - Monitor pod restart
+  - Validate data recovery
+  - Check NF reconnection
+success_criteria:
+  - MongoDB restarts with data intact
+  - All NFs reconnect within 3 minutes

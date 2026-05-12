@@ -1,0 +1,34 @@
+# CDK
+cdk.out/
+.cdk.staging/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Secrets / env
+.env
+.env.*
+*.pem
+*.key
+
+# Build artifacts
+*.zip
+!lambda-src/**/*.zip
+
+# kubectl binary (fetch at deploy — see lambda-src/kubectl-layer/README.md)
+lambda-src/kubectl-layer/python/kubectl

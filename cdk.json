@@ -1,0 +1,21 @@
+{
+  "app": "python3 app.py",
+  "context": {
+    "project_name": "telco-buddy-v2",
+    "nf_namespace": "open5gs",
+    "eks_version": "1.31",
+    "eks_node_type": "t3.medium",
+    "eks_node_count": 2,
+    "eks_disk_size": 20,
+    "heal_mode": "APPROVAL_REQUIRED",
+    "open5gs_tag": "2.6.6",
+    "mongo_tag": "6.0",
+    "ecr_public_alias": "a7y4t3f5",
+    "bedrock_model": "auto",
+    "embed_model": "amazon.titan-embed-text-v2:0",
+    "prometheus_scrape_interval": "5s",
+    "alertmanager_group_wait": "2s",
+    "alertmanager_group_interval": "2s",
+    "alertmanager_repeat_interval": "5m"
+  }
+}

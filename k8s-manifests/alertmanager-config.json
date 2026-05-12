@@ -1,0 +1,1 @@
+{"route": {"receiver": "telco-buddy", "routes": [{"match": {"team": "telco-buddy"}, "receiver": "telco-buddy", "group_wait": "2s", "group_interval": "2s", "repeat_interval": "5m"}]}, "receivers": [{"name": "telco-buddy", "webhook_configs": [{"url": "https://x580dzayv8.execute-api.us-east-2.amazonaws.com/prod/agent-diagnose", "send_resolved": true}]}]}

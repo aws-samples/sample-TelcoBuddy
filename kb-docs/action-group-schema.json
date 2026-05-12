@@ -1,0 +1,98 @@
+{
+    "functions": [
+        {
+            "name": "get_pod_logs",
+            "description": "Get recent log lines from a network function pod",
+            "parameters": {
+                "tail_lines": {
+                    "description": "Number of log lines",
+                    "type": "integer",
+                    "required": false
+                },
+                "nf_name": {
+                    "description": "NF deployment name",
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "requireConfirmation": "DISABLED"
+        },
+        {
+            "name": "get_k8s_events",
+            "description": "Get Kubernetes events for a network function",
+            "parameters": {
+                "nf_name": {
+                    "description": "NF name",
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "requireConfirmation": "DISABLED"
+        },
+        {
+            "name": "get_deployment_status",
+            "description": "Get replica counts for all NF deployments",
+            "parameters": {},
+            "requireConfirmation": "DISABLED"
+        },
+        {
+            "name": "get_nf_dependencies",
+            "description": "Get NF dependency list",
+            "parameters": {
+                "nf_name": {
+                    "description": "NF deployment name",
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "requireConfirmation": "DISABLED"
+        },
+        {
+            "name": "scale_deployment",
+            "description": "Scale a 5G NF deployment to specified replica count. Use this to heal crashed NFs by scaling them back up.",
+            "parameters": {
+                "replicas": {
+                    "description": "Target replica count",
+                    "type": "integer",
+                    "required": true
+                },
+                "nf_name": {
+                    "description": "NF deployment name to scale",
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "requireConfirmation": "DISABLED"
+        },
+        {
+            "name": "restart_deployment",
+            "description": "Restart a 5G NF deployment by triggering a rolling restart. Use when pod is in error state.",
+            "parameters": {
+                "nf_name": {
+                    "description": "NF deployment name to restart",
+                    "type": "string",
+                    "required": true
+                }
+            },
+            "requireConfirmation": "DISABLED"
+        },
+        {
+            "name": "get_nodegroup_status",
+            "description": "Get EKS node group status including scaling config and instance count. Use when all pods show no-nodes-available.",
+            "parameters": {},
+            "requireConfirmation": "DISABLED"
+        },
+        {
+            "name": "scale_nodegroup",
+            "description": "Scale the EKS worker node group. Use when nodes are at 0 and pods cannot be scheduled.",
+            "parameters": {
+                "desired_size": {
+                    "description": "Number of EC2 worker nodes to run",
+                    "type": "integer",
+                    "required": true
+                }
+            },
+            "requireConfirmation": "DISABLED"
+        }
+    ]
+}

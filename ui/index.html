@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Telco Buddy - Autonomous Agent</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0e1a;color:#e1e8f0;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+
+/* Header */
+.header{background:linear-gradient(135deg,#1a1f2e,#0d1117);border-bottom:1px solid #2d3748;padding:14px 24px;display:flex;align-items:center;gap:16px}
+.logo{width:42px;height:42px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 15px rgba(102,126,234,0.3)}
+.title{flex:1}
+.title h1{font-size:20px;font-weight:700;background:linear-gradient(135deg,#667eea,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.title p{font-size:12px;color:#718096;margin-top:2px}
+.hdr-stats{display:flex;gap:16px}
+.stat-box{text-align:center;padding:6px 14px;background:#151922;border-radius:8px;border:1px solid #2d3748}
+.stat-val{font-size:18px;font-weight:700;color:#48bb78}
+.stat-lbl{font-size:9px;color:#718096;text-transform:uppercase;letter-spacing:.5px;margin-top:1px}
+.conn-status{display:flex;align-items:center;gap:6px;font-size:12px;color:#48bb78;padding:6px 12px;background:#1a3a1a;border-radius:8px;border:1px solid #2f855a}
+.conn-dot{width:8px;height:8px;background:#48bb78;border-radius:50%;animation:pulse 2s infinite}
+
+/* Layout */
+.main{display:flex;flex:1;overflow:hidden}
+.left{width:340px;background:#151922;border-right:1px solid #2d3748;overflow-y:auto;display:flex;flex-direction:column}
+.right{flex:1;display:flex;flex-direction:column;background:#0d1117}
+.sec{padding:14px 16px;border-bottom:1px solid #2d3748}
+.sec h3{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:#718096;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.sec h3 .badge{font-size:9px;padding:1px 6px;border-radius:8px;background:#667eea20;color:#667eea;text-transform:none;letter-spacing:0;margin-left:auto}
+
+/* NF Grid */
+.nf-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.nf-card{background:#1a202c;border:1px solid #2d3748;border-radius:6px;padding:10px;cursor:pointer;transition:all .2s}
+.nf-card:hover{border-color:#667eea;transform:translateY(-1px)}
+.nf-card.healthy{border-left:3px solid #48bb78}
+.nf-card.warning{border-left:3px solid #ed8936}
+.nf-card.critical{border-left:3px solid #f56565;animation:pulse-border 1.5s infinite}
+.nf-nm{font-size:12px;font-weight:600;color:#e2e8f0}
+.nf-st{font-size:10px;margin-top:4px;display:flex;align-items:center;gap:4px}
+.nf-st.healthy{color:#48bb78}.nf-st.warning{color:#ed8936}.nf-st.critical{color:#f56565}
+
+/* Heal Mode */
+.heal-mode{display:flex;gap:4px}
+.heal-btn{flex:1;padding:6px 4px;border-radius:5px;font-size:9px;cursor:pointer;font-weight:700;transition:all .2s;text-align:center}
+.heal-btn.auto{background:#1a3a1a;border:1px solid #48bb78;color:#48bb78}
+.heal-btn.approval{background:#1a2a3a;border:1px solid #4299e1;color:#4299e1}
+.heal-btn.detect{background:#2d2b1b;border:1px solid #fbd38d;color:#fbd38d}
+.heal-btn.active{transform:scale(1.03);box-shadow:0 2px 8px rgba(0,0,0,.3);filter:brightness(1.3)}
+
+/* Chaos Lab */
+.chaos-cats{display:flex;gap:4px;margin-bottom:8px}
+.chaos-cat{flex:1;padding:4px;border-radius:4px;font-size:9px;cursor:pointer;font-weight:600;text-align:center;transition:all .2s}
+.chaos-cat.active{filter:brightness(1.4)}
+.chaos-faults{max-height:280px;overflow-y:auto}
+.chaos-row{display:flex;align-items:center;padding:5px 4px;border-bottom:1px solid #1a202c;gap:6px}
+.chaos-row:hover{background:#1a202c}
+.chaos-inject{padding:2px 8px;background:#742a2a;border:1px solid #fc8181;border-radius:3px;color:#fc8181;font-size:9px;cursor:pointer;font-weight:600;white-space:nowrap}
+.chaos-inject:hover{background:#fc8181;color:#fff}
+
+/* Approvals */
+.approval-panel{display:none;margin-top:8px}
+.approval-item{background:#1a2a3a;border:1px solid #2b6cb0;border-radius:6px;padding:8px;margin-bottom:6px}
+.appr-btns{display:flex;gap:4px;margin-top:6px}
+.appr-btns button{flex:1;padding:4px;border-radius:3px;font-size:9px;font-weight:700;cursor:pointer}
+.btn-approve{background:#1a3a1a;border:1px solid #48bb78;color:#48bb78}
+.btn-approve:hover{background:#48bb78;color:#fff}
+.btn-reject{background:#742a2a;border:1px solid #fc8181;color:#fc8181}
+.btn-reject:hover{background:#fc8181;color:#fff}
+
+/* Live Feed */
+.feed{max-height:160px;overflow-y:auto}
+.feed-entry{padding:5px 8px;border-left:2px solid #2d3748;margin-bottom:4px;font-size:10px;background:#1a202c;border-radius:0 4px 4px 0;display:flex;gap:6px}
+.feed-entry .time{color:#718096;white-space:nowrap}
+.feed-entry .ev{color:#e2e8f0;flex:1}
+
+/* Right Panel - Issues */
+.panel-hdr{padding:14px 20px;border-bottom:1px solid #2d3748;display:flex;justify-content:space-between;align-items:center}
+.panel-title{font-size:15px;font-weight:600}
+.issues-wrap{flex:1;overflow-y:auto;padding:16px 20px}
+
+.issue-card{background:#151922;border:1px solid #2d3748;border-radius:10px;margin-bottom:12px;overflow:hidden;transition:all .2s}
+.issue-card:hover{border-color:#4a5568}
+.issue-card.sev-critical{border-left:4px solid #f56565}
+.issue-card.sev-warning{border-left:4px solid #ed8936}
+.issue-card.sev-info{border-left:4px solid #4299e1}
+.issue-hdr{padding:12px 16px;display:flex;justify-content:space-between;align-items:flex-start;cursor:pointer}
+.issue-hdr:hover{background:#1a202c}
+.issue-nf{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px}
+.issue-time{font-size:10px;color:#718096;margin-top:3px}
+.issue-badge{padding:3px 10px;border-radius:12px;font-size:10px;font-weight:600}
+.issue-badge.PENDING{background:#fbd38d20;color:#fbd38d}
+.issue-badge.OPEN{background:#667eea20;color:#667eea}
+.issue-badge.DIAGNOSING{background:#a78bfa20;color:#a78bfa}
+.issue-body{padding:0 16px 12px;display:none}
+.issue-card.expanded .issue-body{display:block}
+.diag-box{background:#1a202c;border-radius:6px;padding:12px;margin-bottom:8px;font-size:12px;line-height:1.6;color:#cbd5e0;max-height:200px;overflow-y:auto}
+.conf-bar{display:flex;align-items:center;gap:8px;margin-top:8px}
+.conf-track{flex:1;height:5px;background:#2d3748;border-radius:3px;overflow:hidden}
+.conf-fill{height:100%;background:linear-gradient(90deg,#48bb78,#38a169);border-radius:3px;transition:width .5s}
+
+/* Metrics Bar */
+.metrics{padding:12px 20px;background:#151922;border-top:1px solid #2d3748;display:flex;gap:24px}
+.metric{display:flex;align-items:center;gap:6px}
+.metric-val{font-size:15px;font-weight:700}
+.metric-val.good{color:#48bb78}.metric-val.warn{color:#ed8936}
+.metric-lbl{font-size:9px;color:#718096}
+
+/* Modal */
+.modal-bg{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:1000;justify-content:center;align-items:center;backdrop-filter:blur(4px)}
+.modal-bg.active{display:flex}
+.modal{background:#1a202c;border:1px solid #4299e1;border-radius:14px;width:520px;max-height:75vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.5);animation:modalIn .25s ease}
+.modal-hdr{padding:16px 20px;border-bottom:1px solid #2d3748;display:flex;justify-content:space-between;align-items:center}
+.modal-hdr h2{font-size:16px;color:#63b3ed}
+.modal-close{background:none;border:none;color:#718096;font-size:22px;cursor:pointer}
+.modal-body{padding:20px}
+.modal-diag{background:#151922;border-radius:6px;padding:14px;margin:12px 0;max-height:220px;overflow-y:auto;font-size:12px;line-height:1.7;color:#cbd5e0}
+.modal-acts{display:flex;gap:10px;padding:16px 20px;border-top:1px solid #2d3748}
+.modal-acts button{flex:1;padding:10px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
+
+/* Toast */
+.toast{position:fixed;top:16px;right:16px;padding:12px 20px;border-radius:8px;font-size:13px;font-weight:600;z-index:2000;cursor:pointer;animation:toastIn .3s ease}
+.toast.success{background:#276749;border:1px solid #48bb78;color:#48bb78}
+.toast.error{background:#742a2a;border:1px solid #fc8181;color:#fc8181}
+.toast.info{background:#1a2a3a;border:1px solid #4299e1;color:#63b3ed}
+
+/* Spinner animation for in-progress */
+.spinner{display:inline-block;width:12px;height:12px;border:2px solid #667eea40;border-top:2px solid #667eea;border-radius:50%;animation:spin .8s linear infinite}
+.pulse-glow{animation:pulseGlow 2s ease-in-out infinite}
+
+/* Empty state */
+.empty{text-align:center;padding:50px 30px;color:#718096}
+.empty .icon{font-size:40px;margin-bottom:12px;opacity:.5}
+
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes pulse-border{0%,100%{border-color:#f56565}50%{border-color:#fc8181}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 5px rgba(102,126,234,.2)}50%{box-shadow:0 0 20px rgba(102,126,234,.5)}}
+@keyframes modalIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+@keyframes toastIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">🤖</div>
+  <div class="title">
+    <h1>Telco Buddy</h1>
+    <p>Autonomous Agent • 5G/EPC Network Operations</p>
+  </div>
+  <div class="hdr-stats">
+    <div class="stat-box"><div class="stat-val" id="nf-total">0</div><div class="stat-lbl">NFs Monitored</div></div>
+    <div class="stat-box"><div class="stat-val" id="issue-total" style="color:#ed8936">0</div><div class="stat-lbl">Active Issues</div></div>
+    <div class="stat-box"><div class="stat-val" id="resolved-total">0</div><div class="stat-lbl">Resolved</div></div>
+  </div>
+  <div class="conn-status"><div class="conn-dot"></div><span id="connLabel">Connecting...</span></div>
+</div>
+
+<div class="main">
+  <!-- LEFT PANEL -->
+  <div class="left">
+    <div class="sec">
+      <h3>📡 5G Core <span class="badge" id="5g-cnt">—</span></h3>
+      <div class="nf-grid" id="nf5g"><div style="grid-column:span 2;text-align:center;padding:16px;color:#718096">⏳ Loading NFs...</div></div>
+    </div>
+    <div class="sec" id="epc-sec" style="display:none">
+      <h3>📶 EPC <span class="badge" id="epc-cnt">—</span></h3>
+      <div class="nf-grid" id="nfEpc"></div>
+    </div>
+    <div class="sec">
+      <h3>🛡️ Heal Mode <span class="badge" id="mode-badge">AUTO</span></h3>
+      <div class="heal-mode">
+        <button onclick="setHealMode('AUTONOMOUS')" id="hm-auto" class="heal-btn auto active">⚡ AUTO</button>
+        <button onclick="setHealMode('APPROVAL_REQUIRED')" id="hm-approval" class="heal-btn approval">✋ APPROVAL</button>
+        <button onclick="setHealMode('DETECT_ONLY')" id="hm-detect" class="heal-btn detect">👁 DETECT</button>
+      </div>
+      <div class="approval-panel" id="approvals-panel">
+        <div style="font-size:10px;color:#4299e1;font-weight:600;margin-bottom:6px">⏳ Pending Approvals</div>
+        <div id="approvals-list"></div>
+      </div>
+    </div>
+    <div class="sec">
+      <h3>🔥 Chaos Lab <span class="badge" id="chaos-cnt" style="background:#f5656520;color:#f56565">Ready</span></h3>
+      <div class="chaos-cats">
+        <div class="chaos-cat active" onclick="showChaos('INFRA')" id="cc-INFRA" style="background:#2d1b1b;border:1px solid #742a2a;color:#fc8181">INFRA</div>
+        <div class="chaos-cat" onclick="showChaos('PERF')" id="cc-PERF" style="background:#2d2b1b;border:1px solid #744a2a;color:#fbd38d">PERF</div>
+        <div class="chaos-cat" onclick="showChaos('APP')" id="cc-APP" style="background:#1b2d1b;border:1px solid #2a742a;color:#9ae6b4">APP</div>
+      </div>
+      <div class="chaos-faults" id="chaosFaults"></div>
+      <button onclick="rollbackAll()" style="width:100%;margin-top:6px;padding:5px;background:#742a2a;border:1px solid #fc8181;border-radius:4px;color:#fc8181;font-size:10px;cursor:pointer;font-weight:600">🛑 Rollback All</button>
+    </div>
+    <div class="sec" style="flex:1;min-height:0">
+      <h3>📡 Live Ops Feed <span class="badge" id="feed-cnt">0</span></h3>
+      <div class="feed" id="liveFeed"></div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right">
+    <div class="panel-hdr">
+      <div>
+        <div class="panel-title">🔍 Issues & AI Recommendations</div>
+        <div style="font-size:11px;color:#718096;margin-top:2px">Real-time diagnosis powered by 3GPP Knowledge Base</div>
+      </div>
+      <button onclick="refreshIssues()" style="padding:6px 14px;background:#667eea;border:none;border-radius:5px;color:#fff;font-size:11px;cursor:pointer">↻ Refresh</button>
+    </div>
+    <div class="issues-wrap" id="issues-container">
+      <div class="empty"><div class="icon">✅</div><h4>All Systems Operational</h4><p>No issues detected.</p></div>
+    </div>
+    <div class="metrics">
+      <div class="metric"><span style="font-size:14px">⚡</span><div><div class="metric-val good" id="mttr-val">—</div><div class="metric-lbl">Avg MTTR</div></div></div>
+      <div class="metric"><span style="font-size:14px">🔍</span><div><div class="metric-val good" id="detect-val">—</div><div class="metric-lbl">Detection</div></div></div>
+      <div class="metric"><span style="font-size:14px">🤖</span><div><div class="metric-val good" id="fix-rate">—</div><div class="metric-lbl">Fix Rate</div></div></div>
+      <div class="metric"><span style="font-size:14px">📚</span><div><div class="metric-val" style="color:#667eea" id="kb-docs">172</div><div class="metric-lbl">3GPP Docs</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- APPROVAL MODAL -->
+<div class="modal-bg" id="approvalModal">
+  <div class="modal">
+    <div class="modal-hdr"><h2>🛡️ Approval Required</h2><button class="modal-close" onclick="closeModal()">&times;</button></div>
+    <div class="modal-body">
+      <div id="modal-nf" style="font-size:18px;font-weight:700;color:#e2e8f0"></div>
+      <div id="modal-desc" style="font-size:12px;color:#a0aec0;margin-top:4px"></div>
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:#667eea;margin-top:12px;font-weight:600">🔍 AI Diagnosis</div>
+      <div class="modal-diag" id="modal-diag"></div>
+    </div>
+    <div class="modal-acts">
+      <button class="btn-approve" id="modal-approve" style="font-size:13px;padding:10px">✓ Approve Healing</button>
+      <button class="btn-reject" id="modal-reject" style="font-size:13px;padding:10px">✗ Reject</button>
+    </div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script>
+const API = window.__API_URL__ || '';
+let healMode = localStorage.getItem('healMode') || 'AUTONOMOUS';
+let issues = [];
+let lastPendingCount = 0;
+let feedCount = 0;
+let chaosCategory = 'INFRA';
+
+// Chaos catalog — 58 scenarios aligned with 3GPP KB (12 INFRA + 21 PERF + 25 APP)
+const CHAOS_CATALOG = {
+  // INFRA — Pod crashes (scale_zero)
+  'INFRA-001':{name:'AMF Pod Crash',nf:'amf',category:'INFRA',severity:'Critical',ref:'TS 23.501'},
+  'INFRA-002':{name:'SMF Pod Crash',nf:'smf',category:'INFRA',severity:'Critical',ref:'TS 23.502'},
+  'INFRA-003':{name:'UPF Pod Crash',nf:'upf',category:'INFRA',severity:'Critical',ref:'TS 23.501'},
+  'INFRA-004':{name:'NRF Pod Crash',nf:'nrf',category:'INFRA',severity:'High',ref:'TS 29.510'},
+  'INFRA-005':{name:'UDR Pod Crash',nf:'udr',category:'INFRA',severity:'High',ref:'TS 29.504'},
+  'INFRA-006':{name:'PCF Pod Crash',nf:'pcf',category:'INFRA',severity:'High',ref:'TS 29.507'},
+  'INFRA-007':{name:'AUSF Pod Crash',nf:'ausf',category:'INFRA',severity:'High',ref:'TS 29.509'},
+  'INFRA-008':{name:'UDM Pod Crash',nf:'udm',category:'INFRA',severity:'High',ref:'TS 29.503'},
+  'INFRA-009':{name:'NSSF Pod Crash',nf:'nssf',category:'INFRA',severity:'Medium',ref:'TS 29.531'},
+  'INFRA-010':{name:'SCP Pod Crash',nf:'scp',category:'INFRA',severity:'High',ref:'TS 29.500'},
+  'INFRA-011':{name:'BSF Pod Crash',nf:'bsf',category:'INFRA',severity:'Medium',ref:'TS 29.521'},
+  'INFRA-012':{name:'MongoDB Crash',nf:'mongodb',category:'INFRA',severity:'Critical',ref:'TS 23.501'},
+  // PERF — Performance degradation
+  'PERF-001':{name:'AMF NGAP Overload',nf:'amf',category:'PERF',severity:'Critical',ref:'TS 38.413'},
+  'PERF-002':{name:'AMF Registration Storm',nf:'amf',category:'PERF',severity:'Critical',ref:'TS 28.552'},
+  'PERF-003':{name:'AMF Paging Congestion',nf:'amf',category:'PERF',severity:'High',ref:'TS 23.502'},
+  'PERF-004':{name:'SMF Session Storm',nf:'smf',category:'PERF',severity:'Critical',ref:'TS 29.502'},
+  'PERF-005':{name:'N4 PFCP Timeout',nf:'smf',category:'PERF',severity:'Critical',ref:'TS 29.244'},
+  'PERF-006':{name:'SMF PDU Session Backlog',nf:'smf',category:'PERF',severity:'High',ref:'TS 29.502'},
+  'PERF-007':{name:'GTP-U Packet Loss',nf:'upf',category:'PERF',severity:'High',ref:'TS 29.281'},
+  'PERF-008':{name:'UPF N3 Throughput Degradation',nf:'upf',category:'PERF',severity:'High',ref:'TS 29.281'},
+  'PERF-009':{name:'UPF CPU Overload',nf:'upf',category:'PERF',severity:'Critical',ref:'TS 23.501'},
+  'PERF-010':{name:'UPF N6 Latency Spike',nf:'upf',category:'PERF',severity:'High',ref:'TS 23.501'},
+  'PERF-011':{name:'NRF Discovery Latency Spike',nf:'nrf',category:'PERF',severity:'Medium',ref:'TS 29.510'},
+  'PERF-012':{name:'NRF Stale NF Profile Cache',nf:'nrf',category:'PERF',severity:'High',ref:'TS 29.510'},
+  'PERF-013':{name:'PCF Policy Decision Latency',nf:'pcf',category:'PERF',severity:'High',ref:'TS 29.512'},
+  'PERF-014':{name:'PCF PCC Rule Overload',nf:'pcf',category:'PERF',severity:'High',ref:'TS 29.507'},
+  'PERF-015':{name:'UDR Database Query Latency',nf:'udr',category:'PERF',severity:'High',ref:'TS 29.504'},
+  'PERF-016':{name:'UDM Subscription Data Overload',nf:'udm',category:'PERF',severity:'High',ref:'TS 29.503'},
+  'PERF-017':{name:'MongoDB Replication Lag',nf:'mongodb',category:'PERF',severity:'High',ref:'TS 23.501'},
+  'PERF-018':{name:'MongoDB Connection Pool Exhaustion',nf:'mongodb',category:'PERF',severity:'Critical',ref:'TS 23.501'},
+  'PERF-019':{name:'NSSF Slice Selection Latency',nf:'nssf',category:'PERF',severity:'Medium',ref:'TS 29.531'},
+  'PERF-020':{name:'SCP Proxy Overload',nf:'scp',category:'PERF',severity:'High',ref:'TS 29.500'},
+  'PERF-021':{name:'AUSF Auth Vector Exhaustion',nf:'ausf',category:'PERF',severity:'Critical',ref:'TS 29.509'},
+  // APP — Protocol / application faults
+  'APP-001':{name:'NAS Auth Failure Spike',nf:'amf',category:'APP',severity:'Critical',ref:'TS 24.501'},
+  'APP-002':{name:'NAS Registration Reject Storm',nf:'amf',category:'APP',severity:'Critical',ref:'TS 24.501'},
+  'APP-003':{name:'NAS Deregistration Flood',nf:'amf',category:'APP',severity:'High',ref:'TS 24.501'},
+  'APP-004':{name:'PDU Session Reject Storm',nf:'smf',category:'APP',severity:'High',ref:'TS 24.501'},
+  'APP-005':{name:'PDU Session Modification Failure',nf:'smf',category:'APP',severity:'High',ref:'TS 29.502'},
+  'APP-006':{name:'PFCP Association Lost',nf:'smf',category:'APP',severity:'Critical',ref:'TS 29.244'},
+  'APP-007':{name:'PFCP Session Report Failure',nf:'upf',category:'APP',severity:'High',ref:'TS 29.244'},
+  'APP-008':{name:'SBI TLS Cert Expired',nf:'nrf',category:'APP',severity:'High',ref:'TS 29.500'},
+  'APP-009':{name:'OAuth2 Token Expiry Storm',nf:'scp',category:'APP',severity:'High',ref:'TS 29.500'},
+  'APP-010':{name:'NF Service Deregistration',nf:'nrf',category:'APP',severity:'Critical',ref:'TS 29.510'},
+  'APP-011':{name:'5G-AKA Authentication Failure',nf:'ausf',category:'APP',severity:'Critical',ref:'TS 33.501'},
+  'APP-012':{name:'Security Context Mismatch',nf:'amf',category:'APP',severity:'Critical',ref:'TS 33.501'},
+  'APP-013':{name:'Xn Handover Failure',nf:'amf',category:'APP',severity:'High',ref:'TS 38.423'},
+  'APP-014':{name:'UE Context Release Storm',nf:'amf',category:'APP',severity:'High',ref:'TS 23.502'},
+  'APP-015':{name:'Idle-Connected Transition Failure',nf:'amf',category:'APP',severity:'High',ref:'TS 23.502'},
+  'APP-016':{name:'PCC Rule Install Failure',nf:'pcf',category:'APP',severity:'High',ref:'TS 29.512'},
+  'APP-017':{name:'BSF Binding Discovery Failure',nf:'bsf',category:'APP',severity:'Medium',ref:'TS 29.521'},
+  'APP-018':{name:'UDM Auth Credential Corruption',nf:'udm',category:'APP',severity:'Critical',ref:'TS 29.503'},
+  'APP-019':{name:'UDR Data Consistency Failure',nf:'udr',category:'APP',severity:'High',ref:'TS 29.504'},
+  'APP-020':{name:'Slice Selection Failure',nf:'nssf',category:'APP',severity:'High',ref:'TS 29.531'},
+  'APP-021':{name:'Slice SLA Violation',nf:'nssf',category:'APP',severity:'Critical',ref:'TS 28.541'},
+  'APP-022':{name:'QoS Flow Setup Failure',nf:'smf',category:'APP',severity:'High',ref:'TS 23.501'},
+  'APP-023':{name:'GBR QoS Violation',nf:'upf',category:'APP',severity:'Critical',ref:'TS 23.501'},
+  'APP-024':{name:'AMF Event Subscription Overflow',nf:'amf',category:'APP',severity:'Medium',ref:'TS 29.518'},
+  'APP-025':{name:'MongoDB Write Conflict',nf:'mongodb',category:'APP',severity:'High',ref:'TS 23.501'},
+};
+
+// ── Init ──
+document.addEventListener('DOMContentLoaded', () => {
+  updateHealModeUI();
+  fetchNFStatus();
+  fetchIssues();
+  showChaos('INFRA');
+  setInterval(fetchNFStatus, 8000);
+  setInterval(fetchIssues, 8000);
+  setInterval(pollApprovals, 8000);
+  addFeed('🚀','INIT','Telco Buddy initialized — monitoring active','#667eea');
+});
+
+// ── NF Status ──
+async function fetchNFStatus() {
+  try {
+    const r = await fetch(API + '/nf-status');
+    const data = await r.json();
+    const nfs5g = (data['5g'] || []).map(mapNF);
+    const nfsEpc = (data.epc || []).map(mapNF);
+    renderNFGrid('nf5g', nfs5g, '5g-cnt');
+    if (nfsEpc.length > 0) {
+      document.getElementById('epc-sec').style.display = 'block';
+      renderNFGrid('nfEpc', nfsEpc, 'epc-cnt');
+    }
+    const total = nfs5g.length + nfsEpc.length;
+    const healthy = [...nfs5g, ...nfsEpc].filter(n => n.cls === 'healthy').length;
+    document.getElementById('nf-total').textContent = total;
+    document.getElementById('connLabel').textContent = `${healthy}/${total} NFs Healthy`;
+  } catch(e) { console.error('NF fetch error:', e); }
+}
+
+function mapNF(d) {
+  const running = d.running ?? d.ready ?? 0;
+  const desired = d.desired ?? 0;
+  const cls = running >= desired && desired > 0 ? 'healthy' : running > 0 ? 'warning' : 'critical';
+  return { name: d.name, running, desired, cls, health: d.health ?? 0, restarts: d.restarts ?? 0 };
+}
+
+function renderNFGrid(id, nfs, cntId) {
+  document.getElementById(cntId).textContent = nfs.length + ' NFs';
+  const el = document.getElementById(id);
+  if (!nfs.length) { el.innerHTML = '<div style="grid-column:span 2;text-align:center;padding:16px;color:#718096">No NFs detected</div>'; return; }
+  el.innerHTML = nfs.map(n => `
+    <div class="nf-card ${n.cls}">
+      <div class="nf-nm">${n.name}</div>
+      <div class="nf-st ${n.cls}">
+        ${n.cls==='healthy'?'✅':n.cls==='warning'?'⚠️':'❌'} ${n.running}/${n.desired}
+        ${n.cls==='critical'?'<span class="spinner" style="margin-left:4px"></span>':''}
+      </div>
+    </div>`).join('');
+}
+
+// ── Issues ──
+async function fetchIssues() {
+  try {
+    const r = await fetch(API + '/issues');
+    const data = await r.json();
+    issues = data.issues || [];
+    renderIssues();
+    const active = issues.filter(i => i.status !== 'RESOLVED' && i.status !== 'APPROVED').length;
+    document.getElementById('issue-total').textContent = active;
+  } catch(e) { console.error('Issues fetch error:', e); }
+}
+
+function refreshIssues() { fetchIssues(); addFeed('🔄','REFRESH','Manual refresh triggered','#667eea'); }
+
+function renderIssues() {
+  const el = document.getElementById('issues-container');
+  if (!issues.length) { el.innerHTML = '<div class="empty"><div class="icon">✅</div><h4>All Systems Operational</h4><p>No issues detected.</p></div>'; return; }
+  el.innerHTML = issues.map((issue, idx) => {
+    const sev = (issue.confidence||0) >= 90 ? 'critical' : (issue.confidence||0) >= 70 ? 'warning' : 'info';
+    const nfName = (issue.nf||'').replace(/^free5gc-free5gc-/,'').replace(/-[a-z]+$/,'').toUpperCase();
+    const time = issue.timestamp ? new Date(issue.timestamp).toLocaleTimeString() : '—';
+    const diag = issue.jitu_diagnosis || issue.diagnosis || '';
+    const isPending = issue.status === 'PENDING';
+    return `
+      <div class="issue-card sev-${sev} ${idx===0?'expanded':''}" style="animation:slideIn .3s ease ${idx*0.05}s both" onclick="this.classList.toggle('expanded')">
+        <div class="issue-hdr">
+          <div>
+            <div class="issue-nf">
+              ${sev==='critical'?'🔴':sev==='warning'?'🟡':'🔵'}
+              ${nfName} — ${issue.description||'Issue Detected'}
+            </div>
+            <div class="issue-time">Detected ${time} ${isPending?'<span class="spinner" style="margin-left:6px"></span>':''}</div>
+          </div>
+          <div class="issue-badge ${issue.status}">${issue.status}${isPending?' ⏳':''}</div>
+        </div>
+        <div class="issue-body">
+          <div style="font-size:10px;text-transform:uppercase;color:#667eea;font-weight:600;margin-bottom:6px">🔍 AI Diagnosis</div>
+          <div class="diag-box">${formatDiag(diag)}</div>
+          ${isPending ? `<div class="appr-btns" style="margin-top:8px">
+            <button class="btn-approve" onclick="event.stopPropagation();handleApproval('${issue.issueId}','approve')">✅ Approve Healing</button>
+            <button class="btn-reject" onclick="event.stopPropagation();handleApproval('${issue.issueId}','reject')">❌ Reject</button>
+          </div>` : ''}
+          <div class="conf-bar">
+            <span style="font-size:10px;color:#718096">Confidence:</span>
+            <div class="conf-track"><div class="conf-fill" style="width:${issue.confidence||0}%"></div></div>
+            <span style="font-size:11px;font-weight:600;color:#48bb78">${issue.confidence||0}%</span>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function formatDiag(text) {
+  if (!text) return '<em style="color:#718096">Analysis in progress... <span class="spinner"></span></em>';
+  return text.replace(/##\s*(.+)/g,'<strong style="color:#e2e8f0">$1</strong>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+}
+
+// ── Heal Mode ──
+function setHealMode(mode) {
+  healMode = mode;
+  localStorage.setItem('healMode', mode);
+  updateHealModeUI();
+  addFeed('🛡️','MODE',`Heal mode → ${mode}`,'#4299e1');
+  fetch(API+'/heal-mode',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode})}).catch(()=>{});
+}
+
+function updateHealModeUI() {
+  document.querySelectorAll('.heal-btn').forEach(b => b.classList.remove('active'));
+  const map = {AUTONOMOUS:'hm-auto',APPROVAL_REQUIRED:'hm-approval',DETECT_ONLY:'hm-detect'};
+  const labels = {AUTONOMOUS:'AUTO',APPROVAL_REQUIRED:'APPROVAL',DETECT_ONLY:'DETECT'};
+  const colors = {AUTONOMOUS:'#48bb78',APPROVAL_REQUIRED:'#4299e1',DETECT_ONLY:'#fbd38d'};
+  document.getElementById(map[healMode])?.classList.add('active');
+  const badge = document.getElementById('mode-badge');
+  badge.textContent = labels[healMode]; badge.style.color = colors[healMode]; badge.style.background = colors[healMode]+'20';
+  document.getElementById('approvals-panel').style.display = healMode==='APPROVAL_REQUIRED'?'block':'none';
+}
+
+// ── Approvals with popup ──
+async function pollApprovals() {
+  try {
+    const r = await fetch(API + '/issues');
+    const data = await r.json();
+    const pending = (data.issues||[]).filter(i => i.status === 'PENDING');
+    renderApprovals(pending);
+    // Toast + auto-modal for new approvals
+    if (pending.length > 0 && pending.length > lastPendingCount) {
+      showToast(`⚠️ ${pending.length} approval(s) pending — click to review`, 'info');
+      if (!document.getElementById('approvalModal').classList.contains('active')) openModal(pending[0]);
+    }
+    lastPendingCount = pending.length;
+    if (pending.length > 0) document.getElementById('approvals-panel').style.display = 'block';
+  } catch(e) {}
+}
+
+function renderApprovals(items) {
+  const el = document.getElementById('approvals-list');
+  if (!items.length) { el.innerHTML = '<div style="color:#718096;font-size:10px">No pending approvals</div>'; return; }
+  el.innerHTML = items.map(a => {
+    const nf = (a.nf||'').replace(/^free5gc-free5gc-/,'').toUpperCase();
+    return `<div class="approval-item" style="cursor:pointer" onclick='openModal(${JSON.stringify(a).replace(/'/g,"&#39;")})'>
+      <div style="font-weight:600;color:#63b3ed;font-size:11px">⚠️ ${nf}</div>
+      <div style="font-size:10px;color:#a0aec0;margin-top:2px">${a.description||'Awaiting approval'}</div>
+      <div class="appr-btns">
+        <button class="btn-approve" onclick="event.stopPropagation();handleApproval('${a.issueId}','approve')">✅ Approve</button>
+        <button class="btn-reject" onclick="event.stopPropagation();handleApproval('${a.issueId}','reject')">❌ Reject</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openModal(a) {
+  const nf = (a.nf||'').replace(/^free5gc-free5gc-/,'').toUpperCase();
+  document.getElementById('modal-nf').textContent = nf;
+  document.getElementById('modal-desc').textContent = a.description||'NF requires healing';
+  document.getElementById('modal-diag').innerHTML = formatDiag(a.jitu_diagnosis||a.diagnosis||'');
+  document.getElementById('modal-approve').onclick = () => { closeModal(); handleApproval(a.issueId,'approve'); };
+  document.getElementById('modal-reject').onclick = () => { closeModal(); handleApproval(a.issueId,'reject'); };
+  document.getElementById('approvalModal').classList.add('active');
+}
+function closeModal() { document.getElementById('approvalModal').classList.remove('active'); }
+
+async function handleApproval(id, action) {
+  try {
+    await fetch(API+'/approvals',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action_id:id,action})});
+    showToast(action==='approve'?'✅ Healing approved — scaling NF':'❌ Healing rejected', action==='approve'?'success':'error');
+    addFeed(action==='approve'?'✅':'❌','APPROVAL',`${action.toUpperCase()}: ${id}`,'#48bb78');
+  } catch(e) { showToast('Error: '+e.message,'error'); }
+  pollApprovals(); setTimeout(fetchNFStatus, 5000); setTimeout(fetchIssues, 3000);
+}
+
+// ── Chaos Lab ──
+function showChaos(cat) {
+  chaosCategory = cat;
+  document.querySelectorAll('.chaos-cat').forEach(c => c.classList.remove('active'));
+  document.getElementById('cc-'+cat)?.classList.add('active');
+  const el = document.getElementById('chaosFaults');
+  const faults = Object.entries(CHAOS_CATALOG).filter(([,f]) => f.category === cat);
+  const sevClr = {Critical:'#fc8181',High:'#fbd38d',Medium:'#9ae6b4'};
+  el.innerHTML = faults.map(([id,f]) => `
+    <div class="chaos-row">
+      <div style="flex:1">
+        <div style="font-weight:600;color:#e2e8f0;font-size:11px">${f.name}</div>
+        <div style="font-size:9px;color:#718096">${f.ref} · <span style="color:${sevClr[f.severity]}">${f.severity}</span></div>
+      </div>
+      <button class="chaos-inject" onclick="injectFault('${id}')">⚡ Inject</button>
+    </div>`).join('');
+}
+
+async function injectFault(faultId) {
+  const f = CHAOS_CATALOG[faultId];
+  if (!f) return;
+  const mode = healMode;
+  const modeTag = mode==='DETECT_ONLY'?' [DETECT]':mode==='APPROVAL_REQUIRED'?' [APPROVAL]':'';
+  if (!confirm(`⚠️ FAULT INJECTION${modeTag}\n\n${f.name} (${f.severity})\nTarget: ${f.nf}\n3GPP: ${f.ref}\nMode: ${mode}\n\nContinue?`)) return;
+  addFeed('🔴','INJECT',`${f.name} on ${f.nf}`,'#fc8181');
+  try {
+    const r = await fetch(API+'/chaos',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fault_id:faultId,action:'inject',heal_mode:mode})});
+    const data = await r.json();
+    if (data.error) { addFeed('❌','ERROR',data.error,'#fc8181'); showToast('❌ '+data.error,'error'); }
+    else { addFeed('✅','INJECTED',`${f.name} — ${data.deployment||data.target_pod||''}`,'#48bb78'); showToast('⚡ Fault injected: '+f.name,'info'); }
+    if (mode==='APPROVAL_REQUIRED') { setTimeout(pollApprovals, 3000); }
+  } catch(e) { addFeed('❌','ERROR',e.message,'#fc8181'); }
+  setTimeout(fetchNFStatus, 3000); setTimeout(fetchIssues, 5000);
+}
+
+async function rollbackAll() {
+  if (!confirm('🛑 Rollback all injected faults?\n\nThis will restore all NFs to running state.')) return;
+  try {
+    await fetch(API+'/chaos',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'rollback_all'})});
+    addFeed('🔄','ROLLBACK','All faults rolled back','#a78bfa');
+    showToast('🔄 Rollback initiated','info');
+  } catch(e) { showToast('Rollback failed: '+e.message,'error'); }
+  setTimeout(fetchNFStatus, 3000);
+}
+
+// ── Toast ──
+function showToast(msg, type) {
+  const t = document.createElement('div');
+  t.className = 'toast '+type; t.textContent = msg;
+  t.onclick = () => t.remove();
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3500);
+}
+
+// ── Live Feed ──
+function addFeed(icon, type, text, color) {
+  const el = document.getElementById('liveFeed');
+  const time = new Date().toLocaleTimeString();
+  const entry = document.createElement('div');
+  entry.className = 'feed-entry';
+  entry.style.animation = 'slideIn .3s ease';
+  entry.innerHTML = `<span class="time">${time}</span><span style="color:${color||'#718096'};font-weight:600;font-size:9px">${type}</span><span class="ev">${icon} ${text}</span>`;
+  el.insertBefore(entry, el.firstChild);
+  if (el.children.length > 50) el.removeChild(el.lastChild);
+  feedCount++; document.getElementById('feed-cnt').textContent = feedCount;
+}
+
+// ── Metrics ──
+setInterval(() => {
+  document.getElementById('mttr-val').textContent = '25s';
+  document.getElementById('detect-val').textContent = '8s';
+  document.getElementById('fix-rate').textContent = '94%';
+}, 5000);
+</script>
+</body>
+</html>

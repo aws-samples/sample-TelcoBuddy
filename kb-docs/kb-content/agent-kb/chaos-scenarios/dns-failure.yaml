@@ -1,0 +1,16 @@
+name: DNS Resolution Failure
+trigger: manual
+impact: high
+scenario:
+  - Simulate CoreDNS failure
+  - Block MongoDB service resolution
+  - Monitor NF init container failures
+expected_agent_action:
+  - Detect init container stuck state
+  - Identify DNS resolution issue
+  - Patch CoreDNS ConfigMap
+  - Restart CoreDNS pods
+  - Verify NF recovery
+success_criteria:
+  - All NFs transition to Running within 5 minutes
+  - No manual intervention required

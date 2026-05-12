@@ -1,0 +1,1265 @@
+{
+  "timestamp": "2026-02-25T09:22:22Z",
+  "region": "us-east-1",
+  "clusters": {},
+  "services": [
+    {
+      "cluster": "5g-core",
+      "serviceName": "smf",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 1,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/5g-smf:4",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-09T16:37:27.566000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 1,
+          "runningCount": 1
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core",
+      "serviceName": "nrf-open5gs",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/real-nrf:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-23T14:10:04.172000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core",
+      "serviceName": "ausf-open5gs",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 0,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/real-ausf:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-23T14:09:54.231000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core",
+      "serviceName": "nrf",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 0,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/open5gs-nrf:7",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-09T16:36:32.419000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core",
+      "serviceName": "amf-open5gs",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 0,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/real-amf:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-23T14:09:09.448000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core",
+      "serviceName": "ue",
+      "status": "ACTIVE",
+      "desiredCount": 0,
+      "runningCount": 0,
+      "pendingCount": 0,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/real-ue:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-23T15:25:44.338000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core",
+      "serviceName": "udm-open5gs",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/real-udm:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-23T14:09:48.883000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core",
+      "serviceName": "gnb",
+      "status": "ACTIVE",
+      "desiredCount": 0,
+      "runningCount": 0,
+      "pendingCount": 0,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/real-gnb:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-09T16:38:01.944000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core",
+      "serviceName": "pcf",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/open5gs-pcf:2",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-09T16:37:38.967000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core",
+      "serviceName": "upf-open5gs",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/real-upf:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-23T14:09:59.534000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core",
+      "serviceName": "upf",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 0,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/open5gs-upf:4",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-09T16:37:32.653000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core",
+      "serviceName": "smf-open5gs",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 0,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/real-smf:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-23T14:09:43.743000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core",
+      "serviceName": "ausf",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/open5gs-ausf:2",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-09T16:37:50.908000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core",
+      "serviceName": "pcf-open5gs",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/real-pcf:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-23T14:10:13.449000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core",
+      "serviceName": "nssf",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 0,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/open5gs-nssf:2",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-09T16:37:55.668000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core",
+      "serviceName": "amf",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 1,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/5g-amf:5",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-09T16:37:22.185000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 1,
+          "runningCount": 1
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core",
+      "serviceName": "nssf-open5gs",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 0,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/real-nssf:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-23T14:10:09.111000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core",
+      "serviceName": "udm",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 0,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/open5gs-udm:2",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-0f4583b2634337b22"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-09T16:37:45.149000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core-cluster",
+      "serviceName": "lte-wireshark",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/lte-wireshark:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-044ea5146fb81c8d2"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-19T00:10:23.953000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core-cluster",
+      "serviceName": "api-gateway",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 0,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/api-gateway:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-044ea5146fb81c8d2"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-19T00:03:41.339000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core-cluster",
+      "serviceName": "data-persistence-manager",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 0,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/data-persistence-manager:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-044ea5146fb81c8d2"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-19T00:02:42.025000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core-cluster",
+      "serviceName": "handover-4g5g",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/handover-4g5g:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-044ea5146fb81c8d2"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-19T00:14:29.400000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core-cluster",
+      "serviceName": "test-orchestrator",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/test-orchestrator:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-044ea5146fb81c8d2"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-19T00:04:57.938000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core-cluster",
+      "serviceName": "kb-integrator",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/kb-integrator:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-044ea5146fb81c8d2"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-19T00:15:58.038000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core-cluster",
+      "serviceName": "3gpp-knowledge-base",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/3gpp-knowledge-base:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-044ea5146fb81c8d2"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-19T00:12:56.882000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core-cluster",
+      "serviceName": "sbi-gateway",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 0,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/sbi-gateway:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-044ea5146fb81c8d2"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-19T00:01:46.033000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core-cluster",
+      "serviceName": "mongodb",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 1,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/mongodb:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-044ea5146fb81c8d2"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-24T11:42:21.719000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 1,
+          "runningCount": 1
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core-cluster",
+      "serviceName": "bedrock-ai-agent",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 0,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/bedrock-ai-agent:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209"
+        ],
+        "securityGroups": [
+          "sg-044ea5146fb81c8d2"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-19T00:11:42.504000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core-bedrock-cluster",
+      "serviceName": "slice-manager-service",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 1,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/network-slice-manager:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-00aaa653ace67586c"
+        ],
+        "securityGroups": [
+          "sg-0d79cb7b25e5b0590"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-18T23:51:26.060000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 1,
+          "runningCount": 1
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core-bedrock-cluster",
+      "serviceName": "performance-monitor-service",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 1,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/performance-monitor:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-00aaa653ace67586c"
+        ],
+        "securityGroups": [
+          "sg-0d79cb7b25e5b0590"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-18T23:56:01.122000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 1,
+          "runningCount": 1
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core-bedrock-cluster",
+      "serviceName": "complete-5g-bedrock-network-v2-ECSService-QyVT5quqDEDJ",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 1,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/complete-5g-with-udr-simulator:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-00aaa653ace67586c"
+        ],
+        "securityGroups": [
+          "sg-0d79cb7b25e5b0590"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-16T01:12:14.157000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 1,
+          "runningCount": 1
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core-bedrock-cluster",
+      "serviceName": "enhanced-ue-simulator-service",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 1,
+      "pendingCount": 1,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/complete-5g-enhanced-ue-simulator:1",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-00aaa653ace67586c"
+        ],
+        "securityGroups": [
+          "sg-0d79cb7b25e5b0590"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-18T23:47:25.973000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 1,
+          "runningCount": 1
+        }
+      ]
+    },
+    {
+      "cluster": "5g-core-network",
+      "serviceName": "complete-5g-core-network-FiveGService-qP171CEBB0V3",
+      "status": "ACTIVE",
+      "desiredCount": 1,
+      "runningCount": 0,
+      "pendingCount": 0,
+      "launchType": "FARGATE",
+      "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/5g-core-with-simulator:4",
+      "networkConfiguration": {
+        "subnets": [
+          "subnet-0ec0823d96fdea209",
+          "subnet-0d563eda6165d420a"
+        ],
+        "securityGroups": [
+          "sg-044ea5146fb81c8d2"
+        ],
+        "assignPublicIp": "DISABLED"
+      },
+      "createdAt": "2025-12-15T21:03:19.707000+05:30",
+      "deployments": [
+        {
+          "status": "PRIMARY",
+          "desiredCount": 1,
+          "runningCount": 0
+        },
+        {
+          "status": "ACTIVE",
+          "desiredCount": 0,
+          "runningCount": 0
+        }
+      ]
+    }
+  ],
+  "tasks": [],
+  "network": {
+    "vpcs": [
+      {
+        "VpcId": "vpc-06464da40ef8190a9",
+        "CidrBlock": "10.0.0.0/16",
+        "IsDefault": false
+      },
+      {
+        "VpcId": "vpc-077cbf887617ead15",
+        "CidrBlock": "172.31.0.0/16",
+        "IsDefault": true
+      },
+      {
+        "VpcId": "vpc-0fd72d0b78f3b455a",
+        "CidrBlock": "10.0.0.0/16",
+        "IsDefault": false
+      },
+      {
+        "VpcId": "vpc-015d0a15dfcf17bf9",
+        "CidrBlock": "192.168.0.0/16",
+        "IsDefault": false
+      }
+    ],
+    "subnets": [
+      {
+        "SubnetId": "subnet-09d45c5a98440cb0f",
+        "VpcId": "vpc-015d0a15dfcf17bf9",
+        "CidrBlock": "192.168.0.0/19",
+        "AvailabilityZone": "us-east-1b",
+        "MapPublicIpOnLaunch": true
+      },
+      {
+        "SubnetId": "subnet-00a59935a30c56672",
+        "VpcId": "vpc-015d0a15dfcf17bf9",
+        "CidrBlock": "192.168.32.0/19",
+        "AvailabilityZone": "us-east-1a",
+        "MapPublicIpOnLaunch": true
+      },
+      {
+        "SubnetId": "subnet-0ec0823d96fdea209",
+        "VpcId": "vpc-077cbf887617ead15",
+        "CidrBlock": "172.31.16.0/20",
+        "AvailabilityZone": "us-east-1a",
+        "MapPublicIpOnLaunch": true
+      },
+      {
+        "SubnetId": "subnet-00aaa653ace67586c",
+        "VpcId": "vpc-0fd72d0b78f3b455a",
+        "CidrBlock": "10.0.1.0/24",
+        "AvailabilityZone": "us-east-1a",
+        "MapPublicIpOnLaunch": false
+      },
+      {
+        "SubnetId": "subnet-07f629344f1a87de3",
+        "VpcId": "vpc-015d0a15dfcf17bf9",
+        "CidrBlock": "192.168.96.0/19",
+        "AvailabilityZone": "us-east-1a",
+        "MapPublicIpOnLaunch": false
+      },
+      {
+        "SubnetId": "subnet-0d563eda6165d420a",
+        "VpcId": "vpc-077cbf887617ead15",
+        "CidrBlock": "172.31.80.0/20",
+        "AvailabilityZone": "us-east-1d",
+        "MapPublicIpOnLaunch": true
+      },
+      {
+        "SubnetId": "subnet-01c1a27f315085994",
+        "VpcId": "vpc-077cbf887617ead15",
+        "CidrBlock": "172.31.48.0/20",
+        "AvailabilityZone": "us-east-1e",
+        "MapPublicIpOnLaunch": true
+      },
+      {
+        "SubnetId": "subnet-032bf0804d723c891",
+        "VpcId": "vpc-077cbf887617ead15",
+        "CidrBlock": "172.31.64.0/20",
+        "AvailabilityZone": "us-east-1f",
+        "MapPublicIpOnLaunch": true
+      },
+      {
+        "SubnetId": "subnet-0373f8f71b1a64b6b",
+        "VpcId": "vpc-077cbf887617ead15",
+        "CidrBlock": "172.31.32.0/20",
+        "AvailabilityZone": "us-east-1b",
+        "MapPublicIpOnLaunch": true
+      },
+      {
+        "SubnetId": "subnet-00c625b62de1bd01c",
+        "VpcId": "vpc-077cbf887617ead15",
+        "CidrBlock": "172.31.0.0/20",
+        "AvailabilityZone": "us-east-1c",
+        "MapPublicIpOnLaunch": true
+      },
+      {
+        "SubnetId": "subnet-0a4a4eb6b04c95351",
+        "VpcId": "vpc-06464da40ef8190a9",
+        "CidrBlock": "10.0.1.0/24",
+        "AvailabilityZone": "us-east-1a",
+        "MapPublicIpOnLaunch": true
+      },
+      {
+        "SubnetId": "subnet-0b4e1892f7d6dea9a",
+        "VpcId": "vpc-015d0a15dfcf17bf9",
+        "CidrBlock": "192.168.64.0/19",
+        "AvailabilityZone": "us-east-1b",
+        "MapPublicIpOnLaunch": false
+      }
+    ],
+    "securityGroups": [
+      {
+        "GroupId": "sg-0d350d19c9636fd89",
+        "GroupName": "eksctl-5g-core-cluster-cluster-ControlPlaneSecurityGroup-Z3YzYLcca5QV",
+        "VpcId": "vpc-015d0a15dfcf17bf9",
+        "Description": "Communication between the control plane and worker nodegroups"
+      },
+      {
+        "GroupId": "sg-0161c328af8bc6d7f",
+        "GroupName": "default",
+        "VpcId": "vpc-077cbf887617ead15",
+        "Description": "default VPC security group"
+      },
+      {
+        "GroupId": "sg-01dc214c9c5b0563f",
+        "GroupName": "default",
+        "VpcId": "vpc-015d0a15dfcf17bf9",
+        "Description": "default VPC security group"
+      },
+      {
+        "GroupId": "sg-0d1edbdd3126d8419",
+        "GroupName": "default",
+        "VpcId": "vpc-0fd72d0b78f3b455a",
+        "Description": "default VPC security group"
+      },
+      {
+        "GroupId": "sg-045244e8a137546f8",
+        "GroupName": "k8s-elb-a88c3dd78995b4ac6ad949c0b2d3ac8d",
+        "VpcId": "vpc-015d0a15dfcf17bf9",
+        "Description": "Security group for Kubernetes ELB a88c3dd78995b4ac6ad949c0b2d3ac8d (open5gs/agent-5g-service)"
+      },
+      {
+        "GroupId": "sg-0d5a129d11de5660e",
+        "GroupName": "5g-k8s-cluster",
+        "VpcId": "vpc-077cbf887617ead15",
+        "Description": "5G Kubernetes Cluster"
+      },
+      {
+        "GroupId": "sg-0a2cf9af618aa9a77",
+        "GroupName": "default",
+        "VpcId": "vpc-06464da40ef8190a9",
+        "Description": "default VPC security group"
+      },
+      {
+        "GroupId": "sg-0f4583b2634337b22",
+        "GroupName": "5g-core-sg",
+        "VpcId": "vpc-077cbf887617ead15",
+        "Description": "5G Core"
+      },
+      {
+        "GroupId": "sg-044ea5146fb81c8d2",
+        "GroupName": "complete-5g-core-network-SecurityGroup-CP8DXwJYpboD",
+        "VpcId": "vpc-077cbf887617ead15",
+        "Description": "5G Core Network Security Group"
+      },
+      {
+        "GroupId": "sg-0035e64296a660243",
+        "GroupName": "eksctl-5g-core-cluster-cluster-ClusterSharedNodeSecurityGroup-g6ytXue3YeuI",
+        "VpcId": "vpc-015d0a15dfcf17bf9",
+        "Description": "Communication between all nodes in the cluster"
+      },
+      {
+        "GroupId": "sg-03338b9235b6bd29f",
+        "GroupName": "5g-working-sg",
+        "VpcId": "vpc-077cbf887617ead15",
+        "Description": "5G Working SG"
+      },
+      {
+        "GroupId": "sg-0d79cb7b25e5b0590",
+        "GroupName": "complete-5g-bedrock-network-v2-SecurityGroup-IYQ6U0hJ4lvT",
+        "VpcId": "vpc-0fd72d0b78f3b455a",
+        "Description": "5G Core NFs with Bedrock"
+      },
+      {
+        "GroupId": "sg-02dd9b6665c6de2ad",
+        "GroupName": "Demo5G-Orchestrator-FiveGSecurityGroup-2FdVb6RcIy4P",
+        "VpcId": "vpc-06464da40ef8190a9",
+        "Description": "Security group for 5G core network functions"
+      },
+      {
+        "GroupId": "sg-035bbe7812340e183",
+        "GroupName": "eks-cluster-sg-5g-core-cluster-1361979161",
+        "VpcId": "vpc-015d0a15dfcf17bf9",
+        "Description": "EKS created security group applied to ENI that is attached to EKS Control Plane master nodes, as well as any managed workloads."
+      }
+    ]
+  },
+  "costs": {
+    "publicIPs": 7,
+    "ipv4MonthlyCost": 25.2,
+    "natGateways": 1,
+    "natMonthlyCost": 32.4,
+    "totalMonthlyCost": 57.6,
+    "currency": "USD"
+  },
+  "summary": {
+    "totalServices": 33,
+    "runningServices": 7,
+    "publicIPCount": 7,
+    "estimatedMonthlyCost": 57.6
+  }
+}

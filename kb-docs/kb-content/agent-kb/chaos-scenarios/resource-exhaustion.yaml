@@ -1,0 +1,16 @@
+name: CPU/Memory Exhaustion
+trigger: manual
+impact: medium
+scenario:
+  - Stress test NF with high load
+  - Monitor resource limits
+  - Check OOMKilled events
+expected_agent_action:
+  - Detect resource pressure
+  - Identify throttled pods
+  - Scale horizontally or vertically
+  - Rebalance workload
+  - Monitor recovery
+success_criteria:
+  - Service maintains availability
+  - Auto-scaling triggers correctly

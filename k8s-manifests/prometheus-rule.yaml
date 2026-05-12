@@ -1,0 +1,121 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"monitoring.coreos.com/v1","kind":"PrometheusRule","metadata":{"annotations":{},"labels":{"aws.cdk.eks/prune-c8ede6747fe0c63ae7fde49b3e6de6b307032a24c5":"","team":"telco-buddy"},"name":"telco-buddy-nf-alerts","namespace":"monitoring"},"spec":{"groups":[{"name":"telco-buddy-infra","rules":[{"alert":"NFScaledToZero","annotations":{"summary":"{{ $labels.deployment }} scaled to zero"},"expr":"kube_deployment_spec_replicas{namespace=\"open5gs\"} == 0","for":"10s","labels":{"severity":"critical","team":"telco-buddy"}}]},{"name":"telco-buddy-perf","rules":[{"alert":"NFHighCPU","annotations":{"summary":"{{ $labels.pod }} CPU \u003e 80%"},"expr":"rate(container_cpu_usage_seconds_total{namespace=\"open5gs\"}[2m]) \u003e 0.8","for":"30s","labels":{"severity":"warning","team":"telco-buddy"}},{"alert":"NFHighMemory","annotations":{"summary":"{{ $labels.pod }} memory \u003e 85%"},"expr":"container_memory_working_set_bytes{namespace=\"open5gs\"} / container_spec_memory_limit_bytes{namespace=\"open5gs\"} \u003e 0.85","for":"30s","labels":{"severity":"warning","team":"telco-buddy"}},{"alert":"NFRestartSpike","annotations":{"summary":"{{ $labels.pod }} 3+ restarts in 10m"},"expr":"increase(kube_pod_container_status_restarts_total{namespace=\"open5gs\"}[10m]) \u003e= 3","for":"0s","labels":{"severity":"critical","team":"telco-buddy"}},{"alert":"NFOOMKilled","annotations":{"summary":"{{ $labels.pod }} OOM killed"},"expr":"kube_pod_container_status_last_terminated_reason{namespace=\"open5gs\", reason=\"OOMKilled\"} == 1","for":"0s","labels":{"severity":"critical","team":"telco-buddy"}},{"alert":"NFNotReady","annotations":{"summary":"{{ $labels.deployment }} has unavailable replicas"},"expr":"kube_deployment_status_replicas_unavailable{namespace=\"open5gs\"} \u003e 0","for":"60s","labels":{"severity":"warning","team":"telco-buddy"}}]}]}}
+    prometheus-operator-validated: "true"
+  creationTimestamp: "2026-03-20T16:44:19Z"
+  generation: 3
+  labels:
+    aws.cdk.eks/prune-c8ede6747fe0c63ae7fde49b3e6de6b307032a24c5: ""
+    release: prometheus
+    team: telco-buddy
+  name: telco-buddy-nf-alerts
+  namespace: monitoring
+  resourceVersion: "923465"
+  uid: f9d37049-a358-4c1e-a136-e4d6bcad17cc
+spec:
+  groups:
+  - name: telco-buddy-infra
+    rules:
+    - alert: NFScaledToZero
+      annotations:
+        impact: Complete NF outage
+        summary: '{{ $labels.deployment }} scaled to zero'
+      expr: kube_deployment_spec_replicas{namespace="open5gs"} == 0
+      for: 0s
+      labels:
+        category: INFRA
+        severity: critical
+        team: telco-buddy
+    - alert: NFCrashLooping
+      annotations:
+        impact: Intermittent NF availability
+        summary: '{{ $labels.pod }} crash looping'
+      expr: rate(kube_pod_container_status_restarts_total{namespace="open5gs"}[5m])
+        > 0
+      for: 0s
+      labels:
+        category: INFRA
+        severity: critical
+        team: telco-buddy
+    - alert: NFOOMKilled
+      annotations:
+        impact: NF memory exhaustion
+        summary: '{{ $labels.pod }} OOM killed'
+      expr: kube_pod_container_status_last_terminated_reason{namespace="open5gs",reason="OOMKilled"}
+        == 1
+      for: 0s
+      labels:
+        category: INFRA
+        severity: critical
+        team: telco-buddy
+  - name: telco-buddy-degradation
+    rules:
+    - alert: NFHighCPU
+      annotations:
+        impact: NF performance degradation, potential timeout failures
+        summary: '{{ $labels.pod }} CPU {{ $value | printf "%.0f" }}%'
+      expr: rate(container_cpu_usage_seconds_total{namespace="open5gs",container!=""}[2m])
+        * 100 > 80
+      for: 30s
+      labels:
+        category: PERF
+        severity: warning
+        team: telco-buddy
+    - alert: NFHighMemory
+      annotations:
+        impact: Risk of OOM kill, NF restart imminent
+        summary: '{{ $labels.pod }} memory {{ $value | printf "%.0f" }}%'
+      expr: container_memory_working_set_bytes{namespace="open5gs",container!=""}
+        / container_spec_memory_limit_bytes{namespace="open5gs",container!=""} * 100
+        > 85
+      for: 30s
+      labels:
+        category: PERF
+        severity: warning
+        team: telco-buddy
+    - alert: NFHighLatency
+      annotations:
+        impact: N1/N2/N4 message processing delays, session setup failures
+        summary: '{{ $labels.pod }} CPU throttled — high latency risk'
+      expr: rate(container_cpu_cfs_throttled_seconds_total{namespace="open5gs",container!=""}[2m])
+        > 0.5
+      for: 30s
+      labels:
+        category: PERF
+        severity: warning
+        team: telco-buddy
+    - alert: NFNotReady
+      annotations:
+        impact: Reduced NF capacity, failover may be active
+        summary: '{{ $labels.deployment }} has unavailable replicas'
+      expr: kube_deployment_status_replicas_unavailable{namespace="open5gs"} > 0
+      for: 30s
+      labels:
+        category: INFRA
+        severity: warning
+        team: telco-buddy
+    - alert: NFPersistentVolumeIssue
+      annotations:
+        impact: MongoDB/UDR data persistence at risk
+        summary: '{{ $labels.persistentvolumeclaim }} storage issue'
+      expr: kube_persistentvolumeclaim_status_phase{namespace="open5gs"} != 1
+      for: 60s
+      labels:
+        category: STORAGE
+        severity: warning
+        team: telco-buddy
+    - alert: NFNetworkErrors
+      annotations:
+        impact: N2/N4/SBI interface packet loss, inter-NF communication degraded
+        summary: '{{ $labels.pod }} network errors detected'
+      expr: rate(container_network_receive_errors_total{namespace="open5gs"}[5m])
+        + rate(container_network_transmit_errors_total{namespace="open5gs"}[5m]) >
+        0
+      for: 30s
+      labels:
+        category: NETWORK
+        severity: warning
+        team: telco-buddy

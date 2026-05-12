@@ -1,0 +1,438 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"amf","aws.cdk.eks/prune-c8aeac662250f6fc1db8cc89d7ff8d23fe83e48168":""},"name":"amf","namespace":"open5gs"},"spec":{"ports":[{"port":38412,"protocol":"SCTP","targetPort":38412}],"selector":{"app":"amf"}}}
+    creationTimestamp: "2026-03-20T16:43:36Z"
+    labels:
+      app: amf
+      aws.cdk.eks/prune-c8aeac662250f6fc1db8cc89d7ff8d23fe83e48168: ""
+    name: amf
+    namespace: open5gs
+    resourceVersion: "1919"
+    uid: 67ae356e-033b-49df-96db-7010d98a8c30
+  spec:
+    clusterIP: 172.20.174.193
+    clusterIPs:
+    - 172.20.174.193
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 38412
+      protocol: SCTP
+      targetPort: 38412
+    selector:
+      app: amf
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"ausf","aws.cdk.eks/prune-c8b5c13840961b55fe8f85bafa134f0e6c9de8068b":""},"name":"ausf","namespace":"open5gs"},"spec":{"ports":[{"port":7777,"protocol":"TCP","targetPort":7777}],"selector":{"app":"ausf"}}}
+    creationTimestamp: "2026-03-20T16:43:36Z"
+    labels:
+      app: ausf
+      aws.cdk.eks/prune-c8b5c13840961b55fe8f85bafa134f0e6c9de8068b: ""
+    name: ausf
+    namespace: open5gs
+    resourceVersion: "1926"
+    uid: b9241cef-098f-4584-b0f1-94136e6f479e
+  spec:
+    clusterIP: 172.20.243.14
+    clusterIPs:
+    - 172.20.243.14
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 7777
+      protocol: TCP
+      targetPort: 7777
+    selector:
+      app: ausf
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"bsf","aws.cdk.eks/prune-c8db279bf1e26a8720da76ed5717dfd103b9428f08":""},"name":"bsf","namespace":"open5gs"},"spec":{"ports":[{"port":7777,"protocol":"TCP","targetPort":7777}],"selector":{"app":"bsf"}}}
+    creationTimestamp: "2026-03-20T16:43:32Z"
+    labels:
+      app: bsf
+      aws.cdk.eks/prune-c8db279bf1e26a8720da76ed5717dfd103b9428f08: ""
+    name: bsf
+    namespace: open5gs
+    resourceVersion: "1836"
+    uid: cea1424d-5c4b-413a-8ce9-5d78510a8b20
+  spec:
+    clusterIP: 172.20.104.169
+    clusterIPs:
+    - 172.20.104.169
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 7777
+      protocol: TCP
+      targetPort: 7777
+    selector:
+      app: bsf
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"mongo","namespace":"open5gs"},"spec":{"externalName":"mongodb.open5gs.svc.cluster.local","type":"ExternalName"}}
+    creationTimestamp: "2026-03-20T18:34:27Z"
+    name: mongo
+    namespace: open5gs
+    resourceVersion: "23575"
+    uid: 5e3e8e5f-0239-48ba-880c-5666d7f255fb
+  spec:
+    externalName: mongodb.open5gs.svc.cluster.local
+    sessionAffinity: None
+    type: ExternalName
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"mongodb","aws.cdk.eks/prune-c86404af9c9a549debccdee0d4dc9490411ea979e4":""},"name":"mongodb","namespace":"open5gs"},"spec":{"ports":[{"port":27017,"protocol":"TCP","targetPort":27017}],"selector":{"app":"mongodb"}}}
+    creationTimestamp: "2026-03-20T16:43:36Z"
+    labels:
+      app: mongodb
+      aws.cdk.eks/prune-c86404af9c9a549debccdee0d4dc9490411ea979e4: ""
+    name: mongodb
+    namespace: open5gs
+    resourceVersion: "1957"
+    uid: 7b25ea6a-3b8a-4406-9da9-9d04af355e64
+  spec:
+    clusterIP: 172.20.123.187
+    clusterIPs:
+    - 172.20.123.187
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 27017
+      protocol: TCP
+      targetPort: 27017
+    selector:
+      app: mongodb
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"nrf","aws.cdk.eks/prune-c85c27add483108ca88a38d25e3ce5c34c32c5ee6c":""},"name":"nrf","namespace":"open5gs"},"spec":{"ports":[{"port":7777,"protocol":"TCP","targetPort":7777}],"selector":{"app":"nrf"}}}
+    creationTimestamp: "2026-03-20T16:43:36Z"
+    labels:
+      app: nrf
+      aws.cdk.eks/prune-c85c27add483108ca88a38d25e3ce5c34c32c5ee6c: ""
+    name: nrf
+    namespace: open5gs
+    resourceVersion: "1910"
+    uid: aca6773e-78a0-479e-8e7a-f07f95271f63
+  spec:
+    clusterIP: 172.20.12.94
+    clusterIPs:
+    - 172.20.12.94
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 7777
+      protocol: TCP
+      targetPort: 7777
+    selector:
+      app: nrf
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"nssf","aws.cdk.eks/prune-c86e7843f37ec6411820237b444cdbb5e4b68e8e93":""},"name":"nssf","namespace":"open5gs"},"spec":{"ports":[{"port":7777,"protocol":"TCP","targetPort":7777}],"selector":{"app":"nssf"}}}
+    creationTimestamp: "2026-03-20T16:43:33Z"
+    labels:
+      app: nssf
+      aws.cdk.eks/prune-c86e7843f37ec6411820237b444cdbb5e4b68e8e93: ""
+    name: nssf
+    namespace: open5gs
+    resourceVersion: "1846"
+    uid: d0787076-8e8a-40a4-9c10-d21fed1e6027
+  spec:
+    clusterIP: 172.20.101.189
+    clusterIPs:
+    - 172.20.101.189
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 7777
+      protocol: TCP
+      targetPort: 7777
+    selector:
+      app: nssf
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"pcf","aws.cdk.eks/prune-c8c6dda96c1c966bc8e6f94dcaad90b325f11993d8":""},"name":"pcf","namespace":"open5gs"},"spec":{"ports":[{"port":7777,"protocol":"TCP","targetPort":7777}],"selector":{"app":"pcf"}}}
+    creationTimestamp: "2026-03-20T16:43:36Z"
+    labels:
+      app: pcf
+      aws.cdk.eks/prune-c8c6dda96c1c966bc8e6f94dcaad90b325f11993d8: ""
+    name: pcf
+    namespace: open5gs
+    resourceVersion: "1928"
+    uid: 2eb8292c-8e75-4ac7-8646-820bcb5490fd
+  spec:
+    clusterIP: 172.20.99.110
+    clusterIPs:
+    - 172.20.99.110
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 7777
+      protocol: TCP
+      targetPort: 7777
+    selector:
+      app: pcf
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"scp","aws.cdk.eks/prune-c839f2d58ed2c7d4aa09cebbf53cbed96d854e0dc6":""},"name":"scp","namespace":"open5gs"},"spec":{"ports":[{"port":7777,"protocol":"TCP","targetPort":7777}],"selector":{"app":"scp"}}}
+    creationTimestamp: "2026-03-20T16:43:36Z"
+    labels:
+      app: scp
+      aws.cdk.eks/prune-c839f2d58ed2c7d4aa09cebbf53cbed96d854e0dc6: ""
+    name: scp
+    namespace: open5gs
+    resourceVersion: "1873"
+    uid: 37890f76-5edc-469c-aba3-6f5628714076
+  spec:
+    clusterIP: 172.20.179.77
+    clusterIPs:
+    - 172.20.179.77
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 7777
+      protocol: TCP
+      targetPort: 7777
+    selector:
+      app: scp
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"smf","aws.cdk.eks/prune-c87578eebfd6017f943eb838b12e9ec5bac5b56f79":""},"name":"smf","namespace":"open5gs"},"spec":{"ports":[{"port":8805,"protocol":"TCP","targetPort":8805}],"selector":{"app":"smf"}}}
+    creationTimestamp: "2026-03-20T16:43:36Z"
+    labels:
+      app: smf
+      aws.cdk.eks/prune-c87578eebfd6017f943eb838b12e9ec5bac5b56f79: ""
+    name: smf
+    namespace: open5gs
+    resourceVersion: "1883"
+    uid: 5997d069-29fb-4ed6-8100-988e44e735a5
+  spec:
+    clusterIP: 172.20.181.122
+    clusterIPs:
+    - 172.20.181.122
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 8805
+      protocol: TCP
+      targetPort: 8805
+    selector:
+      app: smf
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"udm","aws.cdk.eks/prune-c888fab52b388976e6f70acd75f55e9d4f2ff03367":""},"name":"udm","namespace":"open5gs"},"spec":{"ports":[{"port":7777,"protocol":"TCP","targetPort":7777}],"selector":{"app":"udm"}}}
+    creationTimestamp: "2026-03-20T16:43:36Z"
+    labels:
+      app: udm
+      aws.cdk.eks/prune-c888fab52b388976e6f70acd75f55e9d4f2ff03367: ""
+    name: udm
+    namespace: open5gs
+    resourceVersion: "1977"
+    uid: a9a8efca-65ad-40e4-a603-05c754c1e10d
+  spec:
+    clusterIP: 172.20.220.148
+    clusterIPs:
+    - 172.20.220.148
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 7777
+      protocol: TCP
+      targetPort: 7777
+    selector:
+      app: udm
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"udr","aws.cdk.eks/prune-c885035957c744fafbdf94c494079850afb786df4b":""},"name":"udr","namespace":"open5gs"},"spec":{"ports":[{"port":7777,"protocol":"TCP","targetPort":7777}],"selector":{"app":"udr"}}}
+    creationTimestamp: "2026-03-20T16:43:36Z"
+    labels:
+      app: udr
+      aws.cdk.eks/prune-c885035957c744fafbdf94c494079850afb786df4b: ""
+    name: udr
+    namespace: open5gs
+    resourceVersion: "1930"
+    uid: b171836d-87bc-4e8b-8c2b-5de4db42d03a
+  spec:
+    clusterIP: 172.20.150.114
+    clusterIPs:
+    - 172.20.150.114
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 7777
+      protocol: TCP
+      targetPort: 7777
+    selector:
+      app: udr
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"upf","aws.cdk.eks/prune-c832e8812eaeb1b4dabbf5d6f8165610a9b3853288":""},"name":"upf","namespace":"open5gs"},"spec":{"ports":[{"port":8805,"protocol":"TCP","targetPort":8805}],"selector":{"app":"upf"}}}
+    creationTimestamp: "2026-03-20T16:43:36Z"
+    labels:
+      app: upf
+      aws.cdk.eks/prune-c832e8812eaeb1b4dabbf5d6f8165610a9b3853288: ""
+    name: upf
+    namespace: open5gs
+    resourceVersion: "1915"
+    uid: 606b3e10-ddfc-48fa-875f-4efa2462f491
+  spec:
+    clusterIP: 172.20.206.44
+    clusterIPs:
+    - 172.20.206.44
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 8805
+      protocol: TCP
+      targetPort: 8805
+    selector:
+      app: upf
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"webui","aws.cdk.eks/prune-c888ade36e3f2db9084a073c6e32e1dc6d99e3cf2f":""},"name":"webui","namespace":"open5gs"},"spec":{"ports":[{"port":9999,"protocol":"TCP","targetPort":9999}],"selector":{"app":"webui"}}}
+    creationTimestamp: "2026-03-20T16:43:36Z"
+    labels:
+      app: webui
+      aws.cdk.eks/prune-c888ade36e3f2db9084a073c6e32e1dc6d99e3cf2f: ""
+    name: webui
+    namespace: open5gs
+    resourceVersion: "1936"
+    uid: dacf11fc-80c1-4961-9968-0df73fb29c66
+  spec:
+    clusterIP: 172.20.206.139
+    clusterIPs:
+    - 172.20.206.139
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 9999
+      protocol: TCP
+      targetPort: 9999
+    selector:
+      app: webui
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""

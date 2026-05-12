@@ -1,0 +1,130 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Agent 5G Network Operations API",
+    "version": "1.0.0",
+    "description": "API for 5G network chaos engineering and analysis"
+  },
+  "paths": {
+    "/api/chaos": {
+      "post": {
+        "summary": "Trigger chaos engineering test",
+        "description": "Execute a chaos engineering scenario on the 5G network",
+        "operationId": "triggerChaosTest",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "scenario": {
+                    "type": "string",
+                    "enum": ["attach-degradation", "handover-failure", "pdu-session-drop", "registration-timeout", "throughput-degradation"],
+                    "description": "Chaos scenario to execute"
+                  }
+                },
+                "required": ["scenario"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Chaos test executed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {"type": "boolean"},
+                    "scenario": {"type": "string"},
+                    "description": {"type": "string"},
+                    "target": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/chaos/analysis/{scenario}": {
+      "get": {
+        "summary": "Get AI analysis for chaos scenario",
+        "description": "Retrieve detailed AI analysis for a triggered chaos scenario",
+        "operationId": "getChaosAnalysis",
+        "parameters": [
+          {
+            "name": "scenario",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chaos scenario name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Analysis retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {"type": "boolean"},
+                    "scenario": {"type": "string"},
+                    "analysis": {"type": "string"},
+                    "model": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/agent/invoke": {
+      "post": {
+        "summary": "Invoke AI analysis",
+        "description": "Get AI-powered analysis for any 5G network issue",
+        "operationId": "invokeAIAnalysis",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "prompt": {
+                    "type": "string",
+                    "description": "Network issue or question to analyze"
+                  }
+                },
+                "required": ["prompt"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Analysis completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {"type": "boolean"},
+                    "response": {"type": "string"},
+                    "model": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
